@@ -13,10 +13,10 @@ public class ProjectSecurityConfig extends WebSecurityConfigurerAdapter {
     Securing all controllers
      */
 
-    @Override
+    /*@Override
     protected void configure(HttpSecurity http) throws Exception {
       http.authorizeRequests().anyRequest().authenticated().and().formLogin().and().httpBasic();
-    }
+    }*/
 
     /*
     Customize security configuration
@@ -28,5 +28,16 @@ public class ProjectSecurityConfig extends WebSecurityConfigurerAdapter {
     * /contact - Not Secured
     */
 
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.authorizeRequests().
+                antMatchers("/myAccount").authenticated().
+                antMatchers("/myBalance").authenticated().
+                antMatchers("/myCards").authenticated().
+                antMatchers("/myLoans").authenticated().
+                antMatchers("/notices").permitAll().
+                antMatchers("/contact").permitAll().
+                and().formLogin().and().httpBasic();
+    }
 
 }
